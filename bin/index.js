@@ -34,7 +34,7 @@ program.parse(process.argv);
 function deploy() {
     try {
         let bucketed = new Bucketed();
-        log.info(JSON.stringify(bucketed.deploy()));
+        bucketed.deploy().then(result => log.info(JSON.stringify(result)));
     } catch (error) {
         log.error(error);
     }
