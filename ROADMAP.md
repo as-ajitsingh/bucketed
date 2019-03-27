@@ -6,6 +6,6 @@ This contains information on planned features for Bucketed.
 - [ ] Implement backup/upload strategies.
 - [ ] Pass bucketed file location and name as argument (currently _.bucketed_ file should be present at the place where bucketed command is executed).
 - [ ] Bucketed command to generate _.bucketed_ file.
-- [X] Add support for AWS S3 bucket.
+- [ ] Add support for AWS S3 bucket.
 
 Note: Scope of Bucketed is not restricted to these features only. More features will be added based on reviews, suggestions and bugs found. 
