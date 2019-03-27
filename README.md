@@ -49,6 +49,11 @@ vendor:
 6. `vendor`-> `keyLocation` _(Required)_ Your google cloud service account key file. Storage API should be enabled for this service account.
 7. `vendor`-> `bucketName` _(Required)_ Your google cloud bucket name. Files in your _distDir_ will be uploaded to this bucket.
 
+After setting up above file, run following command to initiate upload process- 
+```
+bucketed deploy
+```
+
 
 ### Maintainer
 [Ajit Singh](https://github.com/as-ajitsingh) 
