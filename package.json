@@ -12,7 +12,7 @@
   "bin": {
     "bucketed": "./bin/index.js"
   },
-  "files":[
+  "files": [
     "lib",
     "bin"
   ],
