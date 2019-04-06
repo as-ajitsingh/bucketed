@@ -12,6 +12,10 @@
   "bin": {
     "bucketed": "./bin/index.js"
   },
+  "files":[
+    "lib",
+    "bin"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/as-ajitsingh/bucketed.git"
