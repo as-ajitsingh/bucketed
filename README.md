@@ -15,7 +15,7 @@ Bucketed allows a simple and elegant way of deploying your static websites to cl
 
 ### Prerequisite
 Bucketed is an npm tool written in nodejs, so it is mandatory to have npm and nodejs in the system, where Bucketed will run. Please install following versions - 
- * Nodejs >= 8.0.0
+ * Nodejs >= 8.6.0
  * NPM >= 5.0.0
 
 ### Installation

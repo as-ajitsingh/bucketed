@@ -2,8 +2,12 @@
 
 const program = require('commander');
 const chalk = require('chalk');
+const yaml = require('yaml');
+const fs = require('fs');
+const path = require('path');
 
 const Bucketed = require('../lib/Bucketed');
+const queries = require('./utilities/queries');
 
 const packageJson = require('../package.json');
 
@@ -17,8 +21,15 @@ program.version(`${packageJson.name}: v${packageJson.version}`, '-v, --version')
     .description(packageJson.description);
 
 program
+    .command('init')
+    .option('-c, --config [location]', 'specify the location and name of bucketed config file', '.bucketed')
+    .alias('i')
+    .description('Initialize bucketed project and create bucketed config file')
+    .action(init);
+
+program
     .command('deploy')
-    .option('-c, --config [location]', 'specify the location of .bucketed file', '.bucketed')
+    .option('-c, --config [location]', 'specify the location and name of bucketed config file', '.bucketed')
     .alias('d')
     .description('Deploy your static site content to specified bucket.')
     .action(deploy);
@@ -32,12 +43,43 @@ if (!process.argv.slice(2).length) {
 
 program.parse(process.argv);
 
+function init({ config }) {
+    try {
+        queries.init().then(initQueryResult => {
+            let configContent = {
+                version: packageJson.version,
+                project: {
+                    name: initQueryResult.projectName,
+                    distDir: initQueryResult.distDir
+                },
+                vendor: {
+                    type: initQueryResult.vendorType,
+                    projectID: initQueryResult.projectID,
+                    keyLocation: initQueryResult.keyLocation,
+                    bucketName: initQueryResult.bucketName
+                }
+            };
+
+            let bucketedConfigFileLocation = path.resolve(config);
+            if (fs.existsSync(bucketedConfigFileLocation)) throw new Error('Bucketed Configuration file already exist.');
+            fs.writeFileSync(bucketedConfigFileLocation, yaml.stringify(configContent));
+        }).catch(catchErrors);
+    } catch (error) {
+        catchErrors(error);
+    }
+}
+
 function deploy({ config }) {
     try {
         let bucketed = new Bucketed(config);
-        bucketed.deploy().then(result => log.info(result));
+        bucketed.deploy().then(result => log.info(result)).catch(catchErrors);
     } catch (error) {
-        log.error(error);
+        catchErrors(error);
     }
 
+}
+
+function catchErrors(error) {
+    log.error('\n'+error);
+    process.exit(1);
 }
