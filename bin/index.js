@@ -18,6 +18,7 @@ program.version(`${packageJson.name}: v${packageJson.version}`, '-v, --version')
 
 program
     .command('deploy')
+    .option('-c, --config [location]', 'specify the location of .bucketed file', '.bucketed')
     .alias('d')
     .description('Deploy your static site content to specified bucket.')
     .action(deploy);
@@ -31,9 +32,9 @@ if (!process.argv.slice(2).length) {
 
 program.parse(process.argv);
 
-function deploy() {
+function deploy({ config }) {
     try {
-        let bucketed = new Bucketed();
+        let bucketed = new Bucketed(config);
         bucketed.deploy().then(result => log.info(result));
     } catch (error) {
         log.error(error);
