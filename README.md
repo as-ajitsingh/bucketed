@@ -25,7 +25,18 @@ npm install -g bucketed
 ```
 
 ### Usage
-To use bucketed, it important to create a config file in the root of the project with name .bucketed. This config file is written in YAML and contains following information -  
+To use bucketed, it important to create a config file in the root of the project with name .bucketed. This can be done via two ways - 
+
+1. Creating config file interactively using bucketed init command. To do that follow these steps - 
+```
+bucketed init
+```
+After executing above command, answer the questions asked from console and it will create a config file with the name .bucketed at the location from where command has run. You can also specify the location of config file by passing __--config__ or __-c__ option. see below - 
+```
+bucketed init -c ./sample-project/my-bucketed-configuration
+```
+
+2. Manually creating config file. This config file is written in YAML and contains following information -  
 ```
 version: 0.1.0
 
@@ -40,18 +51,21 @@ vendor:
   bucketName: sample-bucket
   
 ```
-
-1. `Version` _(Optional)_ It is the version of Bucketed.
-2. `project`->`name` _(Optional)_ Name of your static website project
-3. `project`->`distDir` _(Required)_ Path to the directory where static web files are present. It is the path where your index.html is present.
-4. `vendor`->`type` _(Required)_ Your cloud bucket provider. As of now only google cloud storage is supported.
-5. `vendor`-> `projectID` _(Required)_ Your google cloud project id.
-6. `vendor`-> `keyLocation` _(Required)_ Your google cloud service account key file. Storage API should be enabled for this service account.
-7. `vendor`-> `bucketName` _(Required)_ Your google cloud bucket name. Files in your _distDir_ will be uploaded to this bucket.
+* `Version` _(Optional)_ It is the version of Bucketed.
+* `project`->`name` _(Optional)_ Name of your static website project
+* `project`->`distDir` _(Required)_ Path to the directory where static web files are present. It is the path where your index.html is present.
+* `vendor`->`type` _(Required)_ Your cloud bucket provider. As of now only google cloud storage is supported.
+* `vendor`-> `projectID` _(Required)_ Your google cloud project id.
+* `vendor`-> `keyLocation` _(Required)_ Your google cloud service account key file. Storage API should be enabled for this service account.
+* `vendor`-> `bucketName` _(Required)_ Your google cloud bucket name. Files in your _distDir_ will be uploaded to this bucket.
 
 After setting up above file, run following command to initiate upload process- 
 ```
 bucketed deploy
+```
+Note: If you running this command somewhere other than the directory where your .bucketed file is present, then use __--config__ or __-c__ option to specify the location of config file. See below - 
+```
+bucketed deploy -c ./sample-project/my-bucketed-configuration
 ```
 
 
