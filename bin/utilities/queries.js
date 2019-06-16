@@ -18,14 +18,15 @@ let init = async function () {
     const vendorType = await new Select({
         name: 'vendorType',
         message: 'Pick your storage provider',
-        choices: ['gcloud']
+        choices: ['gcloud', 'aws']
     }).run();
-
-    const vendorOtherDetails= await prompt([
+    
+    const vendorOtherDetails = await prompt([
         {
             type: 'input',
             name: 'projectID',
-            message: 'Your cloud provider project ID'
+            skip: vendorType !== 'gcloud',
+            message: 'Your gcloud provider project ID'
         },
         {
             type: 'input',

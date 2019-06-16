@@ -54,11 +54,13 @@ function init({ config }) {
                 },
                 vendor: {
                     type: initQueryResult.vendorType,
-                    projectID: initQueryResult.projectID,
+                    // projectID: initQueryResult.projectID, // changing for google cloud #1
                     keyLocation: initQueryResult.keyLocation,
                     bucketName: initQueryResult.bucketName
                 }
             };
+            // only add if the project id is returned from prompt            
+            if (initQueryResult.projectID) configContent.vendor['projectID'] = initQueryResult.projectID;
 
             let bucketedConfigFileLocation = path.resolve(config);
             if (fs.existsSync(bucketedConfigFileLocation)) throw new Error('Bucketed Configuration file already exist.');
@@ -80,6 +82,6 @@ function deploy({ config }) {
 }
 
 function catchErrors(error) {
-    log.error('\n'+error);
+    log.error('\n' + error);
     process.exit(1);
 }
