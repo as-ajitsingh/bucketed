@@ -1,6 +1,6 @@
 {
   "name": "bucketed",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "This tool will help in deploying static website to cloud storage/bucket.",
   "main": "lib/Bucketed.js",
   "engines": {
