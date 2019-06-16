@@ -1,7 +1,7 @@
 # Bucketed
 ![node](https://img.shields.io/node/v/bucketed.svg) ![npm](https://img.shields.io/npm/dt/bucketed.svg) ![GitHub issues](https://img.shields.io/github/issues/as-ajitsingh/bucketed.svg)
 
-    This tool will help in deploying static website to cloud storage/bucket.
+    This tool helps in deploying static website to cloud storage/bucket.
 Bucketed allows a simple and elegant way of deploying your static websites to cloud storage/bucket providers. As many of the cloud providers give the facility of hosting a static website through cloud storages such as Google Cloud Storage, AWS S3 etc. You can also integrate Bucketed with your CD tool for autonomous deployment of your site generated through Angular, React etc.
 
 ## Table of Contents: 
@@ -54,10 +54,10 @@ vendor:
 * `Version` _(Optional)_ It is the version of Bucketed.
 * `project`->`name` _(Optional)_ Name of your static website project
 * `project`->`distDir` _(Required)_ Path to the directory where static web files are present. It is the path where your index.html is present.
-* `vendor`->`type` _(Required)_ Your cloud bucket provider. As of now only google cloud storage is supported.
-* `vendor`-> `projectID` _(Required)_ Your google cloud project id.
-* `vendor`-> `keyLocation` _(Required)_ Your google cloud service account key file. Storage API should be enabled for this service account.
-* `vendor`-> `bucketName` _(Required)_ Your google cloud bucket name. Files in your _distDir_ will be uploaded to this bucket.
+* `vendor`->`type` _(Required)_ Your cloud bucket provider. As of now only Google Cloud Storage (gcloud) and Amazon Web Services (aws) are supported.
+* `vendor`-> `projectID` _(Required if vendor is gcloud)_ Your google cloud project id. 
+* `vendor`-> `keyLocation` _(Required)_ Your cloud service account key file (in json). Storage API should be enabled for this service account.
+* `vendor`-> `bucketName` _(Required)_ Your cloud bucket name. Files in your _distDir_ will be uploaded to this bucket.
 
 After setting up above file, run following command to initiate upload process- 
 ```
